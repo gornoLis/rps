@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rock Paper Scissors</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="main">
+	<div class="table-score">
+		<span class="text-players">You vs Comp</span>
+		<table><tr>
+			<td class="score"><span id="p1">0</span></td>
+			<td class="score"><span id="p2">0</span></td>
+		</tr></table>
+	</div><br>
+		<span class="text round"></span><br>
+		<span class="text result"></span><br>
+		<span class="text-winner"></span><br><br>
+	<button class="btn start">Start new game</button>
+	<img src="./img/rock.gif" alt="rock" id="rock" class="btn invisible"/>
+	<img src="./img/paper.gif" alt="paper" id="paper" class="btn invisible"/>
+	<img src="./img/scissors.gif" alt="scissors" id="scissors" class="btn invisible"/>
+</div>
+<div class="history"></div>
+
+<script type="text/javascript">
+const items=['rock','paper','scissors'];
+let scorePlayer=0, scoreComputer=0, numRound=0, rounds = 3;
+let lastSelect = '';
+
+const getPlayerChoice=(e)=>{
+	if (lastSelect!='')
+		lastSelect.classList.remove('selectedImg');
+	lastSelect = e.target;
+	lastSelect.classList.toggle('selectedImg');
+	
+	const id=e.target.id;
+	
+	switch(id){
+		case items[0]:
+			playRound(items[0],getComputerChoice());
+			break;
+		case items[1]:
+			playRound(items[1],getComputerChoice());
+			break;
+		case items[2]:
+			playRound(items[2],getComputerChoice());
+			break;
+	}	
+}
+
+const getComputerChoice=()=>{
+	return items[Math.floor(Math.random()*items.length)];
+}
+
+const setVisible=()=>{
+	buttons.forEach(button=>{
+		if (button.classList.contains('invisible')) 
+			button.classList.remove('invisible');
+		else
+			button.classList.toggle('invisible');
+	});
+}
+
+const refresh=()=>{	
+	setVisible();
+	scorePlayer=0;
+	scoreComputer=0;
+	numRound=0;	
+	resultText.innerText='Choose Rock, Paper or Scissors!';
+	roundText.innerText='';
+	winnerText.innerText = '';
+	history.innerHTML='';
+	setScoreText();	
+}
+// get buttons
+const btnStart = document.querySelector('.start');
+btnStart.addEventListener('click',refresh);
+
+const buttons = document.querySelectorAll('.btn');//all buttons
+
+const btnRPS = document.querySelectorAll('#rock #paper #scissors');
+buttons.forEach(button=>button.addEventListener('click', getPlayerChoice));
+//get spans
+const score1 = document.querySelector('#p1');
+const score2 = document.querySelector('#p2');
+const roundText = document.querySelector('.round');
+const resultText = document.querySelector('.result');
+const winnerText = document.querySelector('.text-winner');
+
+const history = document.querySelector('.history');
+
+const playRound=(playerSelect, computerSelect)=>{
+	let result = '';
+	if (playerSelect == computerSelect) {
+		result='Tie!';
+	}
+	else {
+		if (playerSelect =='rock') {
+			if (computerSelect=='paper') {
+				result = 'You lose round! Paper beats rock.';
+				scoreComputer++;
+			}
+			else{
+				result = 'You win round! Rock beats scissors.';
+				scorePlayer++;
+			}
+		}
+		else if (playerSelect =='paper') {
+			if (computerSelect == 'rock') {
+				result = 'You win round! Paper beats rock.';
+				scorePlayer++;
+			}
+			else{
+				result = 'You lose round! Scissors beats paper.';
+				scoreComputer++;
+			}
+		}
+		else if (playerSelect =='scissors') {
+			if (computerSelect == 'rock') {
+				result = 'You lose round! Rock beats scissors.';
+				scoreComputer++;
+			}
+			else{
+				result = 'You win round! Scissors beats paper.';
+				scorePlayer++;
+			}
+		}
+	}
+	setResultText(result);
+	checkScore();
+}
+const setResultText=(text)=>{
+	resultText.innerText=text;
+	history.innerHTML+=`<b>Round ${++numRound}</b> ${text} <br>`;
+}
+const setScoreText=()=>{
+	score1.innerText=scorePlayer;
+	score2.innerText=scoreComputer;
+}
+const setRoundText=()=>{
+	roundText.innerText="Round " + numRound;
+}
+
+const checkScore=()=>{
+	setScoreText();	
+	setRoundText();
+	if(scorePlayer== rounds || scoreComputer== rounds){
+		setVisible();
+		winnerText.innerText = 'You '+ ((scorePlayer> scoreComputer) ? 'WON' : 'LOST') + ' game';
+	}
+}
+</script>
+</body>
+</html>

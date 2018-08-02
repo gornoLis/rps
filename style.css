@@ -1,0 +1,71 @@
+
+table{
+	margin-top: 10px;
+	margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+button{
+	padding: 5px; 
+	font-size: 20px;
+	margin: 5px;
+}
+td{
+    padding: 10px;
+}
+.main{
+	width: 500px;
+	height: 300px;
+	margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+   	text-align: center;
+
+}
+.history{
+	width: 400px;
+	margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 50px; 
+   	font-size: 20px;
+
+}
+.invisible{
+	display: none;
+}
+.btn{
+	cursor: hand;
+	cursor: pointer;
+}
+.score{
+	color: white;
+	background-color: black;
+	height: 50px;
+	font-size: 40px;  	
+
+}
+.text-players{
+   	font-size: 25px;	
+   	color: red;
+}
+.text{
+	font-size: 20px;	
+}
+.round{
+	font-weight:bold;
+}
+.text-winner{
+	font-size: 30px;
+	color: green;	
+	font-style:italic;
+	font-weight:bold;
+}
+img:hover{
+	border: 1px solid red;
+}
+.selectedImg{
+	border: 1px solid red;
+}

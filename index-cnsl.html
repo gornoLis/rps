@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rock Paper Scissors</title>
+</head>
+<body>
+	<div>
+		See Console (F12) <br>
+		Waiting 5 sec to start...
+	</div>
+</body>
+<script type="text/javascript">
+const items=['rock','paper','scissors'];
+let scorePlayer=0, scoreComputer=0, rounds = 3;
+const computerPlay=()=>{
+	return items[Math.floor(Math.random()*items.length)];
+}
+const checkPlayerSelect=(playerSelect)=>{
+	for(let i=0; i< items.length; i++){
+		if(playerSelect==items[i]){
+			return true;
+			}
+		}
+	return false;
+}
+const round=(playerSelect, computerSelect)=>{
+	let result;
+	if (playerSelect == computerSelect) {
+		result='Tie!';
+	}
+	else if (playerSelect=='rock'&& computerSelect=='paper'){
+		result = 'You lose! Paper beats rock.';
+		scoreComputer++;
+	}
+	else if (playerSelect=='rock'&& computerSelect=='scissors'){
+		result = 'You win! Rock beats scissors.';
+		scorePlayer++;
+	}
+	else if (playerSelect=='paper'&& computerSelect=='rock'){
+		result = 'You win! Paper beats rock.';
+		scorePlayer++;
+	}
+	else if (playerSelect=='paper'&& computerSelect=='scissors'){
+		result = 'You lose! Scissors beats paper.';
+		scoreComputer++;
+	}
+	else if (playerSelect=='scissors'&& computerSelect=='rock'){
+		result = 'You lose! Rock beats scissors.';
+		scoreComputer++;
+	}
+	else if (playerSelect=='scissors'&& computerSelect=='paper'){
+		result = 'You win! Scissors beats paper.';
+		scorePlayer++;
+	}
+	return result;
+}
+const game=()=>{
+	let num=0;
+	while(scorePlayer < rounds && scoreComputer < rounds){
+		playerSelect = prompt('Rock, Paper or Scissors?','').toLowerCase();
+		computerSelect = computerPlay();
+		if(playerSelect!='' && checkPlayerSelect(playerSelect)){
+			console.log('Round '+ ++num + '\n' + round(playerSelect,computerSelect));
+			console.log(scorePlayer + ' - ' + scoreComputer);
+		}
+		else{
+			console.log("Wrong word!");	
+		}
+	}
+	console.log('Gameover!\nPlayer '+ scorePlayer + ' - '+ scoreComputer +	' Computer'+
+		'\nWinner is '+ ((scorePlayer >= scoreComputer) ? 'YOU' : 'COMPUTER'));
+}
+
+setTimeout(game, 5000);
+</script>
+</html>
