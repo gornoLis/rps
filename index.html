@@ -21,7 +21,7 @@
 	<img src="./img/paper.gif" alt="paper" id="paper" class="btn invisible"/>
 	<img src="./img/scissors.gif" alt="scissors" id="scissors" class="btn invisible"/>
 </div>
-<div class="history"></div>
+<div class="history text"></div>
 
 <script type="text/javascript">
 const items=['rock','paper','scissors'];
@@ -71,6 +71,7 @@ const refresh=()=>{
 	roundText.innerText='';
 	winnerText.innerText = '';
 	history.innerHTML='';
+	lastSelect='';
 	setScoreText();	
 }
 // get buttons
@@ -146,6 +147,7 @@ const checkScore=()=>{
 	setScoreText();	
 	setRoundText();
 	if(scorePlayer== rounds || scoreComputer== rounds){
+		lastSelect.classList.remove('selectedImg');
 		setVisible();
 		winnerText.innerText = 'You '+ ((scorePlayer> scoreComputer) ? 'WON' : 'LOST') + ' game';
 	}
