@@ -11,15 +11,15 @@
 		<div class="table-score">
 			<span class="text-players">You vs Comp</span>
 			<table><tr>
-				<td class="score"><span id="p1">{{ scorePlayer }}</span></td>
-				<td class="score"><span id="p2">{{ scoreComputer }}</span></td>
+				<td class="score"><span id="p1" v-text=scorePlayer></span></td>
+				<td class="score"><span id="p2" v-text=scoreComputer></span></td>
 			</tr></table>
 		</div><br>
-			<span class="text round">{{ roundText }}</span><br>
-			<span class="text result">{{ resultText }}</span><br>
-			<span class="text-winner">{{ winnerText }}</span><br><br>
-		<button class="btn start" v-show="btnStart" @click="refresh">Start new game</button>
-		<img src="./img/rock.gif" alt="rock" id="rock" class="btn " v-show="btnRPS" @click="getPlayerChoice"/>
+			<span class="text round" v-text=roundText></span><br>
+			<span class="text result" v-text=resultText></span><br>
+			<span class="text-winner" v-text=winnerText></span><br><br>
+		<button class="start btn" v-show="btnStart" @click="refresh">Start new game</button>
+		<img src="./img/rock.gif" alt="rock" id="rock" class="btn" v-show="btnRPS" @click="getPlayerChoice"/>
 		<img src="./img/paper.gif" alt="paper" id="paper" class="btn" v-show="btnRPS" @click="getPlayerChoice"/>
 		<img src="./img/scissors.gif" alt="scissors" id="scissors" class="btn" v-show="btnRPS" @click="getPlayerChoice"/>
 	</div>
@@ -39,7 +39,7 @@ var app=new Vue({
 		scorePlayer: '',
 		scoreComputer: '',
 		roundText: '',
-		resultText: '',
+		resultText: 'It\'s "Rock Paper Scissors" game',
 		winnerText: '',
 		lastSelect: '',
 		numRound: 0,
@@ -49,27 +49,22 @@ var app=new Vue({
 	},
 	methods: {
 		setVisible: function(){
-			if(this.btnStart){
-				this.btnStart=false;
-				this. btnRPS=true;
-			}
-			else{
-				this.btnStart=true;
-				this.btnRPS=false;
-			}
+			this.btnStart = this.btnRPS;
+			this.btnRPS = !this.btnStart;
 		},
 		refresh: function(){
 			this.setVisible();
 			this.scorePlayer=0;
 			this.scoreComputer=0;
 			this.numRound=0;	
-			this.resultText='Choose Rock, Paper or Scissors!';
+			this.resultText='Choose Rock, Paper or Scissors';
 			this.roundText='';
 			this.winnerText = '';
 			this.lastSelect='';			
 			this.history=[];	
 		},
 		getPlayerChoice: function(e){
+			// selection of button
 			if (app.lastSelect!='')
 				app.lastSelect.classList.remove('selectedImg');
 			this.lastSelect = e.target;
@@ -91,9 +86,10 @@ var app=new Vue({
 		},
 		setResultText: function(text){
 			this.resultText=text;
+			this.roundText= 'Round ' + ++this.numRound;
 			// ! add tags in text
 			this.history.push({
-				text: `Round ${++this.numRound} ${text}`
+				text: `Round ${this.numRound} ${text}`
 			});		}
 	}
 })
@@ -144,9 +140,11 @@ const playRound=(playerSelect, computerSelect)=>{
 	checkScore();
 }
 const checkScore=()=>{
-	
+	// end game
 	if(app.scorePlayer== rounds || app.scoreComputer== rounds){
+		// remove selection
 		app.lastSelect.classList.remove('selectedImg');
+		// to start values
 		app.setVisible();
 		app.winnerText = 'You '+ ((app.scorePlayer> app.scoreComputer) ? 'WON' : 'LOST') + ' game';
 	}

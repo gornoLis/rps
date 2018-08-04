@@ -1,5 +1,5 @@
 body{
-	background-image: url(http://www.radionetplus.ru/uploads/posts/2013-07/1374819980_www.radionetplus.ru-805.jpg);
+	background-image: url("./img/00236cd3537859.jpg");
 	background-size: cover;
 		)
 }
@@ -8,11 +8,6 @@ table{
 	margin-left: auto;
     margin-right: auto;
     width: 50%;
-}
-button{
-	padding: 5px; 
-	font-size: 20px;
-	margin: 5px;
 }
 td{
     padding: 10px;
@@ -29,36 +24,52 @@ td{
 
 }
 .history{	
-	background-color: black;
 	opacity: 0.6;	
-	width: 400px;
+	width: 450px;
 	margin-top: 30px;
     margin-left: auto;
-    margin-right: auto;
-    padding-left: 50px; 
+    margin-right: auto; 
    	font-size: 20px;
 
 }
 li{
-	list-style-type: none;
+	list-style-type: none;	
+	background-color: black;
+	padding: 5px 0 0 10px;
 }
 .invisible{
 	display: none;
+}
+.start{
+	box-shadow: 
+		 5px 5px 4px rgba(255,255,255,0.7);
+	border: 0;
+	padding: 5px; 
+	font-size: 20px;
+	margin: 30px;
+}
+.start:hover{
+	background:  #d7d7d0;
+	transform: scale(1.1);
 }
 .btn{
 	cursor: hand;
 	cursor: pointer;
 }
+
 .score{
 	color: white;
 	background-color: black;
-	opacity: 0.6;	
+	opacity: 0.5;	
 	height: 50px;
-	font-size: 40px;  	
+	font-size: 40px;  
+	display: inline-block;
+	width: 50px;
+	margin: 0 5px 0 5px;	
 }
 .text-players{
    	font-size: 25px;	
-   	color: red;
+   	color: black;
 }
 .text{
 	font-size: 20px;
@@ -69,12 +80,13 @@ li{
 }
 .text-winner{
 	font-size: 30px;
-	color: green;	
+	color: red;	
 	font-style:italic;
 	font-weight:bold;
 }
 img:hover{
-	border: 1px solid red;
+	transform: scale(1.5);
+
 }
 .selectedImg{
 	border: 1px solid red;

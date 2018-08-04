@@ -21,7 +21,11 @@
 	<img src="./img/paper.gif" alt="paper" id="paper" class="btn invisible"/>
 	<img src="./img/scissors.gif" alt="scissors" id="scissors" class="btn invisible"/>
 </div>
-<div class="history"></div>
+<div class="history text">
+	<ul>
+		
+	</ul>
+</div>
 
 <script type="text/javascript">
 const items=['rock','paper','scissors'];
@@ -88,7 +92,7 @@ const roundText = document.querySelector('.round');
 const resultText = document.querySelector('.result');
 const winnerText = document.querySelector('.text-winner');
 
-const history = document.querySelector('.history');
+const history = document.querySelector('ul');
 
 const playRound=(playerSelect, computerSelect)=>{
 	let result = '';
@@ -132,7 +136,7 @@ const playRound=(playerSelect, computerSelect)=>{
 }
 const setResultText=(text)=>{
 	resultText.innerText=text;
-	history.innerHTML+=`<b>Round ${++numRound}</b> ${text} <br>`;
+	history.innerHTML+=`<li>Round ${++numRound} ${text} <li>`;
 }
 const setScoreText=()=>{
 	score1.innerText=scorePlayer;
